@@ -22,9 +22,17 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def versionProperties = new Properties()
+def versionPropertiesFile = rootProject.file('version.properties')
+if (versionPropertiesFile.exists()) {
+    versionPropertiesFile.withReader('UTF-8') { reader ->
+        versionProperties.load(reader)
+    }
+}
+
 android {
     namespace "com.example.flutter_signin_signout"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion versionProperties.getProperty('flutter.compileSdkVersion').toInteger()
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -45,8 +53,8 @@ android {
         applicationId "com.example.flutter_signin_signout"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion versionProperties.getProperty('flutter.minSdkVersion').toInteger()
+        targetSdkVersion versionProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
