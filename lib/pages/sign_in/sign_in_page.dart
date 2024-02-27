@@ -28,23 +28,23 @@ class SignInPage extends StatelessWidget {
 }
 
 class _SignInForm extends StatelessWidget {
-  const _SignInForm({super.key, required this.formKey});
+  const _SignInForm({required this.formKey});
 
   final GlobalKey<FormBuilderState> formKey;
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
       key: formKey,
+      initialValue: {
+        _FormName.email.name: 'hoge@hoge.com',
+        _FormName.password.name: 'hogehoge',
+      },
       child: Column(
         children: [
           _EmailField(),
           _PasswordField(),
         ],
       ),
-      initialValue: {
-        _FormName.email.name: 'hoge@hoge.com',
-        _FormName.password.name: 'hogehoge',
-      },
     );
   }
 }
@@ -92,7 +92,6 @@ class _PasswordField extends StatelessWidget {
 
 class _SignInButton extends ConsumerWidget {
   const _SignInButton({
-    super.key,
     required this.formKey,
   });
 
