@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_signin_signout/components/error_view.dart';
 import 'package:flutter_signin_signout/pages/sign_in/sign_in_process_provider.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -90,7 +91,7 @@ class _PasswordField extends StatelessWidget {
   }
 }
 
-class _SignInButton extends ConsumerWidget {
+class _SignInButton extends ConsumerWidget with ErrorView {
   const _SignInButton({
     required this.formKey,
   });
@@ -107,10 +108,15 @@ class _SignInButton extends ConsumerWidget {
           final email = state.fields[_FormName.email.name]?.value as String;
           final password =
               state.fields[_FormName.password.name]?.value as String;
-          await ref.read(signInProcessProvider.notifier).signIn(
+          final result = await ref.read(signInProcessProvider.notifier).signIn(
                 email: email,
                 password: password,
               );
+          if (result.hasError) {
+            if (context.mounted) {
+              await showError(context, result);
+            }
+          } else {}
         }
       },
       child: switch (process.isLoading) {
