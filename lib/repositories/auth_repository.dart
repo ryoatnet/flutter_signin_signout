@@ -35,9 +35,13 @@ class AuthRepositoryPseudo extends AuthRepository with LateResponse {
     required String password,
   }) async {
     return response(() {
-      _state = AuthStateType.authorized;
-      listener?.call(_state);
-      return _state;
+      if (password.contains('error')) {
+        throw Exception('Sign in failed');
+      } else {
+        _state = AuthStateType.authorized;
+        listener?.call(_state);
+        return _state;
+      }
     });
   }
 

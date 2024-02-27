@@ -9,7 +9,7 @@ class SignInProcess extends _$SignInProcess {
   @override
   Future<void> build() async {}
 
-  Future<void> signIn({
+  Future<AsyncValue<void>> signIn({
     required String email,
     required String password,
   }) async {
@@ -21,5 +21,6 @@ class SignInProcess extends _$SignInProcess {
           );
       return;
     });
+    return state;
   }
 }
