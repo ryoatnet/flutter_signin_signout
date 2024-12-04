@@ -7,10 +7,15 @@
 
 import 'package:flutter_signin_signout/signin_signout_app.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const SignInSignOutApp());
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: SignInSignOutApp(),
+      ),
+    );
   });
 }
