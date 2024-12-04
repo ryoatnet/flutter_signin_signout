@@ -1,9 +1,9 @@
 name: Flutter Build APK
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - "feature/**"
 
 jobs:
   build:
