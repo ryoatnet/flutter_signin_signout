@@ -1,0 +1,50 @@
+name: Build Check
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+
+concurrency:
+  group: build-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter (mise)
+        uses: jdx/mise-action@v1
+        with:
+          # Use the repository's mise.toml to install the specified Flutter/sdk/tooling
+          file: mise.toml
+
+      - name: Cache pub and .dart_tool
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            .dart_tool
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Format check
+        # Fail if any files need formatting
+        run: flutter format --set-exit-if-changed .
+
+      - name: Static analysis
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Build APK (release)
+        # Optional build step to verify a real build succeeds on CI
+        run: flutter build apk --release
