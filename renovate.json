@@ -2,5 +2,39 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "timezone": "Asia/Tokyo",
+  "rangeStrategy": "bump",
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 2,
+  "schedule": [
+    "before 3am on monday"
+  ],
+  "mergeType": "squash",
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "pub"
+      ],
+      "groupName": "pub packages",
+      "automerge": true,
+      "automergeType": "pr",
+      "mergeType": "squash",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "matchPackageManagers": [
+        "github-actions"
+      ],
+      "groupName": "github actions",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": false
+    }
   ]
 }
