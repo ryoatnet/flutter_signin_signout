@@ -6,21 +6,47 @@ part of 'sign_out_process_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(SignOutProcess)
+const signOutProcessProvider = SignOutProcessProvider._();
+
+final class SignOutProcessProvider
+    extends $AsyncNotifierProvider<SignOutProcess, void> {
+  const SignOutProcessProvider._()
+      : super(
+          from: null,
+          argument: null,
+          retry: null,
+          name: r'signOutProcessProvider',
+          isAutoDispose: true,
+          dependencies: null,
+          $allTransitiveDependencies: null,
+        );
+
+  @override
+  String debugGetCreateSourceHash() => _$signOutProcessHash();
+
+  @$internal
+  @override
+  SignOutProcess create() => SignOutProcess();
+}
+
 String _$signOutProcessHash() => r'2f2fcd5736814172f7defefcf55862b0533efd7b';
 
-/// See also [SignOutProcess].
-@ProviderFor(SignOutProcess)
-final signOutProcessProvider =
-    AutoDisposeAsyncNotifierProvider<SignOutProcess, void>.internal(
-  SignOutProcess.new,
-  name: r'signOutProcessProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$signOutProcessHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$SignOutProcess = AutoDisposeAsyncNotifier<void>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+abstract class _$SignOutProcess extends $AsyncNotifier<void> {
+  FutureOr<void> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    build();
+    final ref = this.ref as $Ref<AsyncValue<void>, void>;
+    final element = ref.element as $ClassProviderElement<
+        AnyNotifier<AsyncValue<void>, void>,
+        AsyncValue<void>,
+        Object?,
+        Object?>;
+    element.handleValue(ref, null);
+  }
+}
