@@ -18,9 +18,6 @@ jobs:
 
       - name: Set up Flutter (mise)
         uses: jdx/mise-action@v3
-        with:
-          # Use the repository's mise.toml to install the specified Flutter/sdk/tooling
-          file: mise.toml
 
       - name: Cache pub and .dart_tool
         uses: actions/cache@v4
