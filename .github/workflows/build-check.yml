@@ -34,7 +34,7 @@ jobs:
 
       - name: Format check
         # Fail if any files need formatting
-        run: flutter format --set-exit-if-changed .
+        run: dart format --set-exit-if-changed .
 
       - name: Static analysis
         run: flutter analyze --no-fatal-infos
