@@ -12,7 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'router_provider.g.dart';
 
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(Ref ref) {
   return GoRouter(
     routes: $appRoutes,
     debugLogDiagnostics: kDebugMode,
@@ -21,9 +21,9 @@ GoRouter router(RouterRef ref) {
       return switch (authState) {
         AuthStateType.authorized => null,
         AuthStateType.unauthorized =>
-          state.matchedLocation.startsWith(_SignInRoute().location)
+          state.matchedLocation.startsWith(SignInRoute().location)
               ? null
-              : _SignInRoute().location,
+              : SignInRoute().location,
       };
     },
     refreshListenable: ref.read(refreshListenableProvider),
@@ -32,7 +32,7 @@ GoRouter router(RouterRef ref) {
 
 /// go_routerのリフレッシュリスナーを提供するProvider
 @Riverpod(keepAlive: true)
-Listenable refreshListenable(RefreshListenableRef ref) {
+Listenable refreshListenable(Ref ref) {
   return Listenable.merge(
     [
       ValueNotifier(ref.watch(authStateProvider)),
@@ -41,23 +41,23 @@ Listenable refreshListenable(RefreshListenableRef ref) {
 }
 
 @TypedGoRoute<RootRoute>(path: '/')
-class RootRoute extends GoRouteData {
+class RootRoute extends GoRouteData with $RootRoute {
   @override
   FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
-    return _HomeRoute().location;
+    return HomeRoute().location;
   }
 }
 
-@TypedGoRoute<_SignInRoute>(path: '/sign_in')
-class _SignInRoute extends GoRouteData {
+@TypedGoRoute<SignInRoute>(path: '/sign_in')
+class SignInRoute extends GoRouteData with $SignInRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const SignInPage();
   }
 }
 
-@TypedGoRoute<_HomeRoute>(path: '/home')
-class _HomeRoute extends GoRouteData {
+@TypedGoRoute<HomeRoute>(path: '/home')
+class HomeRoute extends GoRouteData with $HomeRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const HomePage();

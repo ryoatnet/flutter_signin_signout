@@ -13,12 +13,12 @@ class AuthRepository {
   Future<AuthStateType> signIn({
     required String email,
     required String password,
-  }) async {
+  }) {
     throw UnimplementedError();
   }
 
   /// 認証を解除する
-  Future<void> signOut() async {
+  Future<void> signOut() {
     throw UnimplementedError();
   }
 }
@@ -33,7 +33,7 @@ class AuthRepositoryPseudo extends AuthRepository with LateResponse {
   Future<AuthStateType> signIn({
     required String email,
     required String password,
-  }) async {
+  }) {
     return response(() {
       if (password.contains('error')) {
         throw Exception('Sign in failed');

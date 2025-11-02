@@ -4,12 +4,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'repositories_provider.g.dart';
 
 @riverpod
-Repositories repositories(RepositoriesRef ref) {
+Repositories repositories(Ref ref) {
   return Repositories();
 }
 
 class Repositories {
   Repositories({AuthRepository? auth}) : auth = auth ?? AuthRepositoryPseudo();
+
   Repositories.pseudo() : auth = AuthRepositoryPseudo();
 
   final AuthRepository auth;
