@@ -1,0 +1,9 @@
+{
+    "dart.getFlutterSdkCommand": {
+        "executable": "mise",
+        "args": [
+            "where",
+            "flutter"
+        ]
+    }
+}
